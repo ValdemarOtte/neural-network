@@ -1,5 +1,6 @@
 import random
-from matplotlib import pyplot as plt
+
+from draw import draw  # type: ignore
 
 
 def create_random_points_blue(min_: int, max_: int, n: int) -> list[list[float]]:
@@ -54,10 +55,4 @@ if __name__ == "__main__":
     points_red = create_random_points_red(0, 20, 80)
     points = points_blue + points_red
 
-    for point in points_blue:
-        plt.plot(point[0], point[1], marker="o", markeredgecolor="blue", markerfacecolor="blue")
-    for point in points_red:
-        plt.plot(point[0], point[1], marker="o", markeredgecolor="red", markerfacecolor="red")
-    plt.xlim(0, 20)
-    plt.ylim(0, 20)
-    plt.show()
+    draw(points_blue, points_red)
