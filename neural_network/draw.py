@@ -89,13 +89,19 @@ plt.show()
 """
 
 
-matrix = [
-    [1, 1, 1, 1, 1, 0, 0],
-    [1, 1, 1, 1, 1, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-]
+matrix = []
+n = np.arange(0, 3, 0.1)
+for i, y in enumerate(n):
+    matrix.append([])
+    for x in n:
+        if x < 1 and y < 1:
+            value = 0
+        else:
+            value = 1
+        matrix[i].append(str(value))
 
+for row in matrix:
+    print("".join(row))
 
 
 coordinats = []
@@ -108,6 +114,8 @@ data = {
     "1": []
 }
 
+import 
+
 def find_hull(target, x, y, coordinats, seen):
 
     try:
@@ -117,6 +125,16 @@ def find_hull(target, x, y, coordinats, seen):
             find_hull(target, x + 1, y, coordinats, seen)
     except IndexError:
         pass
+
+    try:
+        if matrix[y][x - 1] == target and [y, x - 1] not in coordinats and [y, x - 1] not in seen:
+            coordinats.append([y, x - 1])
+            seen.append([y, x - 1])
+            find_hull(target, x - 1, y, coordinats, seen)
+    except IndexError:
+        pass
+
+
     try:
         if matrix[y + 1][x] == target and [y + 1, x] not in coordinats and [y + 1, x] not in seen:
             coordinats.append([y + 1, x])
@@ -125,42 +143,57 @@ def find_hull(target, x, y, coordinats, seen):
     except IndexError:
         pass
     try:
+        if matrix[y - 1][x] == target and [y - 1, x] not in coordinats and [y - 1, x] not in seen:
+            coordinats.append([y - 1, x])
+            seen.append([y - 1, x])
+            find_hull(target, x, y - 1, coordinats, seen)
+    except IndexError:
+        pass
+    """
+    try:
         if matrix[y + 1][x + 1] == target and [y + 1, x + 1] not in coordinats and [y + 1, x + 1] not in seen:
             coordinats.append([y + 1, x + 1])
             seen.append([y + 1, x + 1])
             find_hull(target, x + 1, y + 1, coordinats, seen)
     except IndexError:
         pass
+    """
     return coordinats, seen
 
 
 matrix.reverse()
-for i, row in enumerate(matrix):
-    for j, element in enumerate(row):
+for y, row in enumerate(matrix):
+    for x, element in enumerate(row):
         coordinats = []
-        if [i, j] not in seen:
-            seen.append([i, j])
-            coordinats.append([i, j])
+        if [y, x] not in seen:
+            seen.append([y, x])
+            coordinats.append([y, x])
             target = element
-            y = j
-            x = i
             coordinats, seen = find_hull(target, y, x, coordinats, seen)
             data[str(target)].append(coordinats)
 
-
+print(len(data["1"]))
+print(data["1"])
 from scipy.spatial import ConvexHull
 points = np.array(data["0"][0])
-hull = ConvexHull(points)
-plt.fill(points[hull.vertices,0], points[hull.vertices,1], 'r', alpha=0.3)
 """
-points = np.array(data["0"][1])
+
 hull = ConvexHull(points)
 plt.fill(points[hull.vertices,0], points[hull.vertices,1], 'r', alpha=0.3)
+
+
+points = np.array(data["1"][0])
+hull = ConvexHull(points)
+plt.fill(points[hull.vertices,0], points[hull.vertices,1], 'r', alpha=0.3)
+
 
 points = np.array(data["1"][0])
 
 hull = ConvexHull(points)
 plt.fill(points[hull.vertices,0], points[hull.vertices,1], 'k', alpha=0.3)
 """
-plt.show()
 
+
+plt.xlim(0, 7)
+plt.ylim(0, 4)
+plt.show()
