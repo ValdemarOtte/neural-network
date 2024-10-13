@@ -1,26 +1,20 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+__pycache__
+
 # Django
 db.sqlite3
 
 # Environments
 .venv
 
-# Files type
-
-
-# Byte-compiled / optimized / DLL files
-__pycache__/
-__pycache__
-
-
 # mypy
 .mypy_cache/
 .dmypy.json
 dmypy.json
 
-
 # ruff
 .ruff_cache
-
 
 # pytest
 .pytest_cache/
