@@ -12,8 +12,6 @@ black = "^23.9.1"
 ruff = "^0.1.0"
 mypy = "^1.6.0"
 numpy = "^1.26.1"
-matplotlib = "^3.8.0"
-scipy = "^1.11.3"
 
 
 [build-system]
@@ -23,11 +21,11 @@ build-backend = "poetry.core.masonry.api"
 
 
 [tool.black]
-line-length = 100
+line-length = 120
 
 
 [tool.ruff]
-select = [
+lint.select = [
     "C",
     "E",
     "F",
@@ -66,7 +64,7 @@ select = [
     "TRY",
     "RUF"
     ]
-ignore = [
+lint.ignore = [
     "E712", # comparison to True/False, we ignore because we use sqlalchemy
     "ANN101", # missing type for self
     "ANN102", # missing type for cls
@@ -81,13 +79,18 @@ ignore = [
     "D105", # missing docstring in magic method,
     "D106", # missing docstring in nested class,
     "D107", # missing docstring in __init__,
+    "D200", # one-line docstring should fit on one line
     "D203", # 0 blank line required before class docstring,
     "D204", # 1 blank line required after class docstring,
     "D212", # multi-line docstring summary should start at the first line,
     "D213", # multi-line docstring summary should start at the second line,
     "D300", # use triple docstring
+    "D407", # missing dashed underline after section
     "D401", # first line should be in imperative mood,
     "D417", # missing argument descriptions in the docstring,
+    "N802", # function name "X" should be lowercase
+    "N803", # argument name "X" should be lowercase
+    "N806", # variable "X" in function should be lowercase
     "S101", # use of assert,
     "PLR2004", # magic value used in comparison
     "PT012", # ptest.raises should contain a simple statement
@@ -96,7 +99,7 @@ ignore = [
     "FBT002", # Boolean default value in function definition,
     "FBT001", # Boolean positional arg in function definition
     ]
-line-length = 100
+line-length = 120
 exclude = [
     ".venv",
     "env",
@@ -106,4 +109,5 @@ exclude = [
     ".github",
     ".mypy_cache",
     ".pytest_cache",
+    "migrations"
 ]
